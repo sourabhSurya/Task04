@@ -1,88 +1,92 @@
 variable "resource_group_name" {
-  description = "The name of the resource group"
   type        = string
+  description = "Name of the resource group to provision resources."
 }
 
 variable "location" {
-  description = "The location of the resources"
   type        = string
+  description = "Azure region where resources will be provisioned."
+  default     = "eastus"
 }
 
-variable "vnet_name" {
-  description = "The name of the virtual network"
+variable "virtual_network_name" {
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-vnet"
+  description = "Name of the virtual network."
 }
 
 variable "subnet_name" {
-  description = "The name of the subnet"
   type        = string
-  default     = "frontend"
+  description = "Name of the subnet inside the virtual network."
 }
 
 variable "public_ip_name" {
-  description = "The name of the public IP"
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-pip"
+  description = "Name of the public IP resource."
 }
 
 variable "dns_name_label" {
-  description = "The DNS name label for the public IP"
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-nginx"
+  description = "DNS label for the public IP resource."
 }
 
 variable "nsg_name" {
-  description = "The name of the network security group"
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-nsg"
+  description = "Name of the Network Security Group (NSG)."
 }
 
-variable "nsg_rule_http_name" {
-  description = "The name of the NSG rule for HTTP"
+variable "http_rule_name" {
   type        = string
-  default     = "AllowHTTP"
+  description = "Name of the HTTP rule in the NSG."
 }
 
-variable "nsg_rule_ssh_name" {
-  description = "The name of the NSG rule for SSH"
+variable "ssh_rule_name" {
   type        = string
-  default     = "AllowSSH"
+  description = "Name of the SSH rule in the NSG."
 }
 
-variable "nic_name" {
-  description = "The name of the network interface"
+variable "network_interface_name" {
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-nic"
+  description = "Name of the Network Interface (NIC)."
 }
 
 variable "vm_name" {
-  description = "The name of the virtual machine"
   type        = string
-  default     = "cmaz-dfc0edb2-mod4-vm"
+  description = "Name of the Linux virtual machine."
 }
 
 variable "vm_os_version" {
-  description = "The OS version of the virtual machine"
   type        = string
-  default     = "ubuntu-24_04-lts"
+  description = "OS version for the virtual machine."
+  default     = "24_04-lts"
 }
 
 variable "vm_sku" {
-  description = "The SKU of the virtual machine"
   type        = string
+  description = "Size of the virtual machine (e.g., Standard_F2s_v2)."
   default     = "Standard_F2s_v2"
 }
 
-variable "vm_password" {
-  description = "The password for the VM"
+variable "vm_admin_username" {
   type        = string
+  description = "Admin username for the VM."
+  default     = "azureuser"
+}
+
+variable "vm_password" {
+  type        = string
+  description = "Admin password for the VM."
   sensitive   = true
 }
 
+variable "ip_configuration_name" {
+  type        = string
+  description = "Name of the IP configuration for the NIC."
+  default     = "ip_config"
+}
+
 variable "tags" {
-  description = "Tags to be applied to resources"
   type        = map(string)
+  description = "Tags to assign to resources."
   default = {
     Creator = "sourabh_suryawanshi@epam.com"
   }
