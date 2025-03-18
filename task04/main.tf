@@ -95,7 +95,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                            = var.vm_name
   location                        = var.location
   resource_group_name             = azurerm_resource_group.rg.name
-  size                            = var.vm_sku
+  size                            = var.vm_size
   admin_username                  = var.vm_admin_username
   admin_password                  = var.vm_password
   disable_password_authentication = false
@@ -109,10 +109,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
     disk_size_gb         = 30
   }
 
+  # Corrected image reference
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = var.vm_os_version
+    publisher = "canonical"
+    offer     = "ubuntu-24_04-lts"
+    sku       = "server"
     version   = "latest"
   }
 
@@ -134,4 +135,14 @@ resource "azurerm_linux_virtual_machine" "vm" {
   tags = var.tags
 
   depends_on = [azurerm_network_interface.nic]
+}
+
+output "vm_public_ip" {
+  value       = azurerm_public_ip.pip.ip_address
+  description = "The public IP address of the virtual machine."
+}
+
+output "vm_fqdn" {
+  value       = azurerm_public_ip.pip.fqdn
+  description = "The fully qualified domain name (FQDN) of the virtual machine."
 }

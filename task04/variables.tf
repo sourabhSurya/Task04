@@ -57,10 +57,10 @@ variable "vm_name" {
 variable "vm_os_version" {
   type        = string
   description = "OS version for the virtual machine."
-  default     = "24_04-lts"
+  default     = "UbuntuLTS"
 }
 
-variable "vm_sku" {
+variable "vm_size" {
   type        = string
   description = "Size of the virtual machine (e.g., Standard_F2s_v2)."
   default     = "Standard_F2s_v2"
